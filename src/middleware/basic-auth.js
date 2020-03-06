@@ -17,15 +17,15 @@ function requireAuth(req, res, next) {
     return res.status(401).json({ error: 'Unauthorized request' })
   }
 
-  AuthService.getUserPass(req.app.get('db'), tokenUserName)
-    .then( hash => {
-      const { password } = hash
+  // AuthService.getUserPass(req.app.get('db'), tokenUserName)
+  //   .then( hash => {
+  //     const { password } = hash
       
-      if( !bcrypt.compareSync( tokenPassword, password ) ){
-        return res.status(401).json({ error: 'Unauthorized request here' })
-      }
+  //     if( !bcrypt.compareSync( tokenPassword, password ) ){
+  //       return res.status(401).json({ error: 'Unauthorized request here' })
+  //     }
       
-  })
+  // })
 
   
 
@@ -34,7 +34,10 @@ function requireAuth(req, res, next) {
     tokenUserName
   )
     .then(user => {
-      if (!user || user.password !== tokenPassword) {
+      
+      const {password} = user 
+
+      if (!user || !bcrypt.compareSync( tokenPassword, password )) {
         return res.status(401).json({ error: 'Unauthorized request' })
       }
 
