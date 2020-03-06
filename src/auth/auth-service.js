@@ -10,6 +10,12 @@ const AuthService = {
       .toString()
       .split(':')
   },
+  getUserPass(db, user_name) {
+    return db('thingful_users')
+    .select('password')
+    .where({user_name})
+    .first()
+  }
 }
 
 module.exports = AuthService
