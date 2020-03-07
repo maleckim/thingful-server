@@ -17,15 +17,7 @@ function requireAuth(req, res, next) {
     return res.status(401).json({ error: 'Unauthorized request' })
   }
 
-  // AuthService.getUserPass(req.app.get('db'), tokenUserName)
-  //   .then( hash => {
-  //     const { password } = hash
-      
-  //     if( !bcrypt.compareSync( tokenPassword, password ) ){
-  //       return res.status(401).json({ error: 'Unauthorized request here' })
-  //     }
-      
-  // })
+ 
 
   
 
